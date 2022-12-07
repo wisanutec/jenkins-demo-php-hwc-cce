@@ -1,27 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: jenkins-demo
+  name: php-demo
   #namespace: default
-  namespace: devops-tools 
+  namespace: default 
 spec:
   selector:
     matchLabels:
-      app: jenkins-demo
+      app: php-demo
   template:
     metadata:
       labels:
-        app: jenkins-demo
+        app: php-demo
     spec:
       containers:
-      - image: swr.ap-southeast-2.myhuaweicloud.com/wisanu/jenkins-demo:<BUILD_TAG>
-      #- image: swr.ap-southeast-2.myhuaweicloud.com/batch/jenkins-demo:latest
+      - image: swr.ap-southeast-2.myhuaweicloud.com/wisanu/php-demo:<BUILD_TAG>
         imagePullPolicy: IfNotPresent
         command:
           - sleep
         args:
           - '1000'
-        name: jenkins-demo
+        name: php-demo
         env:
         - name: branch
       imagePullSecrets:

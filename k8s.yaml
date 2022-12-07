@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jenkins-demo
+  #namespace: default
+  namespace: devops-tools 
+spec:
+  selector:
+    matchLabels:
+      app: jenkins-demo
+  template:
+    metadata:
+      labels:
+        app: jenkins-demo
+    spec:
+      containers:
+      - image: swr.ap-southeast-2.myhuaweicloud.com/wisanu/jenkins-demo:<BUILD_TAG>
+      #- image: swr.ap-southeast-2.myhuaweicloud.com/batch/jenkins-demo:latest
+        imagePullPolicy: IfNotPresent
+        command:
+          - sleep
+        args:
+          - '1000'
+        name: jenkins-demo
+        env:
+        - name: branch
+      imagePullSecrets:
+        - name: default-secret
